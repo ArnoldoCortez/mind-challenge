@@ -11,6 +11,9 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "src/setupTests",
     mockReset: true,
+    coverage: {
+      provider: "c8",
+    },
     reporters: ["default", "html"],
   },
 });
