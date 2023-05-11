@@ -11,5 +11,6 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "src/setupTests",
     mockReset: true,
+    reporters: ["default", "html"],
   },
 });
