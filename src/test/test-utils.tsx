@@ -1,10 +1,12 @@
 import { render } from "@testing-library/react";
 import type { RenderOptions } from "@testing-library/react";
 import React, { PropsWithChildren } from "react";
+import { MemoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { setupStore } from "../store/store";
-import type { AppStore, RootState } from "../store/store";
 import type { PreloadedState } from "@reduxjs/toolkit";
+import { setupStore } from "../store/store";
+
+import type { AppStore, RootState } from "../store/store";
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store. For
@@ -24,7 +26,11 @@ function renderWithProviders(
   }: ExtendedRenderOptions = {}
 ) {
   function Wrapper({ children }: PropsWithChildren<any>): JSX.Element {
-    return <Provider store={store}>{children}</Provider>;
+    return (
+      <Provider store={store}>
+        <MemoryRouter>{children}</MemoryRouter>
+      </Provider>
+    );
   }
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 }
