@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from "./App.tsx";
 import { setupStore } from "./store/store.ts";
+import CustomThemeProvider from "./theme";
 
 const store = setupStore();
 
@@ -12,9 +13,10 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <CustomThemeProvider>
+          <App />
+        </CustomThemeProvider>
       </BrowserRouter>
     </Provider>
-    ,
   </React.StrictMode>
 );
