@@ -9,16 +9,11 @@ type Props = {
 };
 
 export const SideNavItem = ({ active = false, icon, path, title }: Props) => {
-  const linkProps = path
-    ? {
-        component: Link,
-        href: path,
-      }
-    : {};
-
   return (
     <li>
       <ButtonBase
+        component={Link}
+        to={path}
         sx={{
           alignItems: "center",
           borderRadius: 1,
@@ -36,7 +31,6 @@ export const SideNavItem = ({ active = false, icon, path, title }: Props) => {
             backgroundColor: "rgba(255, 255, 255, 0.04)",
           },
         }}
-        {...linkProps}
       >
         {icon && (
           <Box
