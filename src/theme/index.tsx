@@ -5,9 +5,22 @@ import {
 } from "@mui/material";
 
 import { createPalette } from "./createPalette";
+import { createComponents } from "./createComponents";
+import { ColorPartial } from "@mui/material/styles/createPalette";
+
+declare module "@mui/material/styles" {
+  interface Palette {
+    neutral: Palette["primary"];
+  }
+
+  interface PaletteOptions {
+    neutral: ColorPartial;
+  }
+}
 
 function createTheme() {
   const palette = createPalette();
+  const components = createComponents({ palette });
 
   return createMuiTheme({
     breakpoints: {
@@ -19,6 +32,7 @@ function createTheme() {
         xl: 1440,
       },
     },
+    components,
     palette,
     shape: {
       borderRadius: 8,
