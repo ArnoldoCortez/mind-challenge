@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 
-import TopNav from "./TopNav";
-import { SideNav } from "./SideNav";
+import TopNav from "./components/TopNav";
+import { SideNav } from "./components/SideNav";
 
 const SIDE_NAV_WIDTH = 280;
 
