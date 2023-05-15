@@ -33,8 +33,8 @@ export const items = [
     ),
   },
   {
-    title: "Logs",
-    path: "/logs",
+    title: "Team logs",
+    path: "/team-logs",
     icon: (
       <SvgIcon fontSize="small">
         <RectangleStackIcon />
