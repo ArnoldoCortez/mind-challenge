@@ -9,7 +9,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 import { useLocation } from "react-router-dom";
 
-import { items } from "./config";
+import { items } from "../config";
 import { SideNavItem } from "./SideNavItem";
 
 type Props = {

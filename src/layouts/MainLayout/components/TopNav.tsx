@@ -10,7 +10,7 @@ import {
 import { alpha, useTheme } from "@mui/material/styles";
 
 import { AccountPopover } from "./AccountPopover";
-import { usePopover } from "../../hooks/usePopover";
+import { usePopover } from "../../../hooks/usePopover";
 
 const SIDE_NAV_WIDTH = 280;
 const TOP_NAV_HEIGHT = 64;
