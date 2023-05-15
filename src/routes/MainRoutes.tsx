@@ -1,4 +1,8 @@
 import MainLayout from "../layouts/MainLayout";
+import ProfilePage from "../pages/Profile";
+import UsersPage from "../pages/Users";
+import AccountsPage from "../pages/Accounts";
+import TeamLogsPage from "../pages/TeamLogs";
 
 const MainRoutes = {
   path: "/",
@@ -6,19 +10,19 @@ const MainRoutes = {
   children: [
     {
       path: "/",
-      element: <h1>Profile</h1>,
+      element: <ProfilePage />,
     },
     {
       path: "/users",
-      element: <h1>Users</h1>,
+      element: <UsersPage />,
     },
     {
       path: "/accounts",
-      element: <h1>Accounts</h1>,
+      element: <AccountsPage />,
     },
     {
-      path: "/logs",
-      element: <h1>Logs</h1>,
+      path: "/team-logs",
+      element: <TeamLogsPage />,
     },
   ],
 };
