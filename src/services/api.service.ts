@@ -1,5 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { User, AddUserBody, EditUserBody } from "./api.types";
+import {
+  User,
+  AddUserBody,
+  EditUserBody,
+  Account,
+  AddAccountBody,
+  EditAccountBody,
+} from "./api.types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -7,8 +14,9 @@ const API_URL = import.meta.env.VITE_API_URL;
 export const apiService = createApi({
   reducerPath: "apiService",
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
-  tagTypes: ["users", "userById"],
+  tagTypes: ["users", "userById", "accounts", "accountById"],
   endpoints: (builder) => ({
+    // ---USERS---
     getUserById: builder.query<User, string>({
       query: (id) => `users/${id}`,
       providesTags: ["userById"],
@@ -40,6 +48,38 @@ export const apiService = createApi({
       }),
       invalidatesTags: ["users"],
     }),
+    // ---ACCOUNTS---
+    getAccountById: builder.query<Account, string>({
+      query: (id) => `accounts/${id}`,
+      providesTags: ["accountById"],
+    }),
+    getAccounts: builder.query<Account[], void>({
+      query: () => "accounts",
+      providesTags: ["accounts"],
+    }),
+    addAccount: builder.mutation<Account, AddAccountBody>({
+      query: (body) => ({
+        url: "accounts",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["accounts"],
+    }),
+    editAccount: builder.mutation<Account, EditAccountBody>({
+      query: ({ id, ...body }) => ({
+        url: `accounts/${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["accounts"],
+    }),
+    deleteAccount: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `accounts/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["accounts"],
+    }),
   }),
 });
 
@@ -52,4 +92,10 @@ export const {
   useAddUserMutation,
   useEditUserMutation,
   useDeleteUserMutation,
+  useGetAccountByIdQuery,
+  useLazyGetAccountByIdQuery,
+  useGetAccountsQuery,
+  useAddAccountMutation,
+  useEditAccountMutation,
+  useDeleteAccountMutation,
 } = apiService;

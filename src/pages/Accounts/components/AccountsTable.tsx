@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   Box,
   Card,
@@ -32,6 +33,7 @@ type Props = {
   ) => void;
   page: number;
   rowsPerPage: number;
+  onDelete: (id: string) => void;
 };
 
 function AccountsTable(props: Props) {
@@ -41,6 +43,7 @@ function AccountsTable(props: Props) {
     onPageChange,
     page = 0,
     rowsPerPage = 0,
+    onDelete,
   } = props;
 
   return (
@@ -74,12 +77,16 @@ function AccountsTable(props: Props) {
                   </TableCell>
                   <TableCell>
                     <Stack direction="row">
-                      <IconButton color="primary">
+                      <IconButton
+                        color="primary"
+                        component={Link}
+                        to={`/accounts/${id}/edit`}
+                      >
                         <SvgIcon>
                           <PencilSquareIcon />
                         </SvgIcon>
                       </IconButton>
-                      <IconButton color="error">
+                      <IconButton color="error" onClick={() => onDelete(id)}>
                         <SvgIcon>
                           <TrashIcon />
                         </SvgIcon>
