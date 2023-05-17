@@ -7,6 +7,14 @@ To run this project you need to have [Nodejs](https://nodejs.org/) and NPM (this
 
 If you are having problems running this project with your current Node version, try installing Node >= 18.15.0
 
+## Environment varialbles
+
+Make sure to create a .env file in the root folder with the following variables:
+
+VITE_API_URL=your-api-url.example
+
+## Commands
+
 Start the project running in your terminal the next two commands (this will install all the dependencies and start the project in development mode).
 Take into account that you need to be in the root path of the project folder, where the package.json file is located.
 

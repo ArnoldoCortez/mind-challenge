@@ -1,9 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import type { PreloadedState } from "@reduxjs/toolkit";
+
+import generalReducer from "./general/general.slice";
 import { apiService } from "../services/api.service";
 
 const rootReducer = combineReducers({
   [apiService.reducerPath]: apiService.reducer,
+  general: generalReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {

@@ -4,6 +4,7 @@ import { styled } from "@mui/material/styles";
 
 import TopNav from "./components/TopNav";
 import { SideNav } from "./components/SideNav";
+import Notifications from "../../components/notifications";
 
 const SIDE_NAV_WIDTH = 280;
 
@@ -44,6 +45,7 @@ function MainLayout() {
           <Outlet />
         </LayoutContainer>
       </LayoutRoot>
+      <Notifications />
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   Box,
   Card,
@@ -34,6 +35,7 @@ type Props = {
   ) => void;
   page: number;
   rowsPerPage: number;
+  onDelete: (id: string) => void;
 };
 
 function UsersTable(props: Props) {
@@ -43,6 +45,7 @@ function UsersTable(props: Props) {
     onPageChange,
     page = 0,
     rowsPerPage = 0,
+    onDelete,
   } = props;
 
   return (
@@ -79,6 +82,7 @@ function UsersTable(props: Props) {
                     <TableCell>{technicalKnowledge}</TableCell>
                     <TableCell>
                       <IconButton
+                        disabled={cvLink === ""}
                         color="primary"
                         component="a"
                         href={cvLink}
@@ -91,12 +95,16 @@ function UsersTable(props: Props) {
                     </TableCell>
                     <TableCell>
                       <Stack direction="row">
-                        <IconButton color="primary">
+                        <IconButton
+                          color="primary"
+                          component={Link}
+                          to={`/users/${id}/edit`}
+                        >
                           <SvgIcon>
                             <PencilSquareIcon />
                           </SvgIcon>
                         </IconButton>
-                        <IconButton color="error">
+                        <IconButton color="error" onClick={() => onDelete(id)}>
                           <SvgIcon>
                             <TrashIcon />
                           </SvgIcon>
