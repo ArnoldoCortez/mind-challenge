@@ -6,6 +6,9 @@ import {
   Account,
   AddAccountBody,
   EditAccountBody,
+  TeamMovement,
+  TeamMovementBody,
+  RemoveUserFromAccount,
 } from "./api.types";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -80,6 +83,23 @@ export const apiService = createApi({
       }),
       invalidatesTags: ["accounts"],
     }),
+    // ---TEAM MOVEMENTS---
+    addUserToAccount: builder.mutation<TeamMovement, TeamMovementBody>({
+      query: (body) => ({
+        url: "movements",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["accountById"],
+    }),
+    removeUserFromAccount: builder.mutation<void, RemoveUserFromAccount>({
+      query: (body) => ({
+        url: "removeFromAccount",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["accountById"],
+    }),
   }),
 });
 
@@ -98,4 +118,6 @@ export const {
   useAddAccountMutation,
   useEditAccountMutation,
   useDeleteAccountMutation,
+  useAddUserToAccountMutation,
+  useRemoveUserFromAccountMutation,
 } = apiService;

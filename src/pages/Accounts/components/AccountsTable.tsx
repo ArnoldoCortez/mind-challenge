@@ -69,7 +69,11 @@ function AccountsTable(props: Props) {
                   <TableCell>{client}</TableCell>
                   <TableCell>{operationManager}</TableCell>
                   <TableCell>
-                    <IconButton color="primary">
+                    <IconButton
+                      color="primary"
+                      component={Link}
+                      to={`/accounts/${id}/team`}
+                    >
                       <SvgIcon>
                         <EyeIcon />
                       </SvgIcon>

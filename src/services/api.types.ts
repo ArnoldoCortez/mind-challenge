@@ -40,3 +40,17 @@ export type AddAccountBody = Pick<
 >;
 
 export type EditAccountBody = Partial<AddAccountBody> & Pick<Account, "id">;
+
+export type TeamMovement = {
+  id: string;
+  userId: string;
+  accountId: string;
+  createdAt: string;
+  deletedAt: string;
+};
+
+export type TeamMovementBody = Pick<TeamMovement, "userId" | "accountId">;
+
+export type RemoveUserFromAccount = {
+  args: TeamMovementBody[];
+};

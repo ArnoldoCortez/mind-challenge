@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 
 import TopNav from "./components/TopNav";
 import { SideNav } from "./components/SideNav";
-import Notifications from "../../components/notifications";
+import Notifications from "../../components/Notifications";
 
 const SIDE_NAV_WIDTH = 280;
 

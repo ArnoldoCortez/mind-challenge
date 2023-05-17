@@ -5,6 +5,7 @@ import AccountsPage from "../pages/Accounts";
 import TeamLogsPage from "../pages/TeamLogs";
 import UsersCreateUpdate from "../pages/UsersCreateUpdate";
 import AccountsCreateUpdate from "../pages/AccountsCreateUpdate";
+import AccountTeam from "../pages/AccountTeam";
 
 const MainRoutes = {
   path: "/",
@@ -37,6 +38,10 @@ const MainRoutes = {
     {
       path: "/accounts/:id/:action",
       element: <AccountsCreateUpdate />,
+    },
+    {
+      path: "/accounts/:id/team",
+      element: <AccountTeam />,
     },
     {
       path: "/team-logs",
