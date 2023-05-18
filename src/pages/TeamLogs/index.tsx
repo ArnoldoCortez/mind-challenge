@@ -10,16 +10,6 @@ import {
 } from "../../services/api.service";
 import { User } from "../../services/api.types";
 
-const data = [
-  {
-    id: "asdasdf",
-    userName: "asdfasdf",
-    accountName: "asdfasdf",
-    startDate: "asdfasdf",
-    endDate: "asdfasdf",
-  },
-];
-
 function TeamLogsPage() {
   const [page, setPage] = useState(0);
   const { data: teamLogsData, isLoading: isTeamLogsLoading } =
