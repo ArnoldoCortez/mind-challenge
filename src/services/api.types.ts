@@ -28,7 +28,7 @@ export type Account = {
   id: string;
   name: string;
   clientName: string;
-  operationManager: string;
+  personResponsibleForOperation: string;
   users: User[];
   createdAt: string;
   updatedAt: string;
@@ -36,7 +36,7 @@ export type Account = {
 
 export type AddAccountBody = Pick<
   Account,
-  "name" | "clientName" | "operationManager"
+  "name" | "clientName" | "personResponsibleForOperation"
 >;
 
 export type EditAccountBody = Partial<AddAccountBody> & Pick<Account, "id">;
@@ -53,4 +53,14 @@ export type TeamMovementBody = Pick<TeamMovement, "userId" | "accountId">;
 
 export type RemoveUserFromAccount = {
   args: TeamMovementBody[];
+};
+
+export type LoginResponse = {
+  user: User;
+  token: string;
+};
+
+export type LoginRequest = {
+  email: string;
+  password: string;
 };

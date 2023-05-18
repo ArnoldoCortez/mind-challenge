@@ -32,7 +32,7 @@ function AccountsCreateUpdate() {
   const initialData = {
     account: account?.name ?? "",
     client: account?.clientName ?? "",
-    operationManager: account?.operationManager ?? "",
+    operationManager: account?.personResponsibleForOperation ?? "",
   };
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function AccountsCreateUpdate() {
     addNewAccount({
       name: data.account,
       clientName: data.client,
-      operationManager: data.operationManager,
+      personResponsibleForOperation: data.operationManager,
     })
       .unwrap()
       .then(() => {
@@ -75,7 +75,7 @@ function AccountsCreateUpdate() {
         id,
         name: data.account,
         clientName: data.client,
-        operationManager: data.operationManager,
+        personResponsibleForOperation: data.operationManager,
       })
         .unwrap()
         .then(() => {

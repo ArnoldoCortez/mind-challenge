@@ -9,16 +9,36 @@ import {
   TeamMovement,
   TeamMovementBody,
   RemoveUserFromAccount,
+  LoginRequest,
+  LoginResponse,
 } from "./api.types";
+import { RootState } from "../store/store";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 // Define a service using a base URL and expected endpoints
 export const apiService = createApi({
   reducerPath: "apiService",
-  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: API_URL,
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).auth.token;
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   tagTypes: ["users", "userById", "accounts", "accountById", "movements"],
   endpoints: (builder) => ({
+    //---AUTH---
+    login: builder.mutation<LoginResponse, LoginRequest>({
+      query: (credentials) => ({
+        url: "signin",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
     // ---USERS---
     getUserById: builder.query<User, string>({
       query: (id) => `users/${id}`,
@@ -102,7 +122,7 @@ export const apiService = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["accountById"],
+      invalidatesTags: ["accountById", "movements"],
     }),
   }),
 });
@@ -110,6 +130,7 @@ export const apiService = createApi({
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const {
+  useLoginMutation,
   useGetUserByIdQuery,
   useLazyGetUserByIdQuery,
   useGetUsersQuery,

@@ -29,7 +29,7 @@ function AccountsPage() {
         id: account.id,
         account: account.name,
         client: account.clientName,
-        operationManager: account.operationManager,
+        operationManager: account.personResponsibleForOperation,
       }))
     : [];
   const accounts = applyPagination(accountsData, page, 10);
