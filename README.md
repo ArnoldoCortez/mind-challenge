@@ -12,6 +12,7 @@ If you are having problems running this project with your current Node version, 
 Make sure to create a .env file in the root folder with the following variables:
 
 VITE_API_URL=your-api-url.example
+VITE_ROLLBAR_ACCESS_TOKEN=your-rollbar-access-token
 
 ## Commands
 

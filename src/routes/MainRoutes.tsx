@@ -6,13 +6,15 @@ import TeamLogsPage from "../pages/TeamLogs";
 import UsersCreateUpdate from "../pages/UsersCreateUpdate";
 import AccountsCreateUpdate from "../pages/AccountsCreateUpdate";
 import AccountTeam from "../pages/AccountTeam";
+import ErrorPage from "../pages/ErrorPage";
 
 const MainRoutes = {
   path: "/",
   element: <MainLayout />,
+  errorElement: <ErrorPage />,
   children: [
     {
-      index: true,
+      path: "/",
       element: <ProfilePage />,
     },
     {
