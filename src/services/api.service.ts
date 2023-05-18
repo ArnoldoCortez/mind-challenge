@@ -17,7 +17,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 export const apiService = createApi({
   reducerPath: "apiService",
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
-  tagTypes: ["users", "userById", "accounts", "accountById"],
+  tagTypes: ["users", "userById", "accounts", "accountById", "movements"],
   endpoints: (builder) => ({
     // ---USERS---
     getUserById: builder.query<User, string>({
@@ -84,6 +84,10 @@ export const apiService = createApi({
       invalidatesTags: ["accounts"],
     }),
     // ---TEAM MOVEMENTS---
+    getTeamMovements: builder.query<TeamMovement[], void>({
+      query: () => "movements",
+      providesTags: ["movements"],
+    }),
     addUserToAccount: builder.mutation<TeamMovement, TeamMovementBody>({
       query: (body) => ({
         url: "movements",
@@ -118,6 +122,7 @@ export const {
   useAddAccountMutation,
   useEditAccountMutation,
   useDeleteAccountMutation,
+  useGetTeamMovementsQuery,
   useAddUserToAccountMutation,
   useRemoveUserFromAccountMutation,
 } = apiService;
