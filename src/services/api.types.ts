@@ -51,6 +51,18 @@ export type TeamMovement = {
 
 export type TeamMovementBody = Pick<TeamMovement, "userId" | "accountId">;
 
+export type TeamMovementDetailed = {
+  id: string;
+  user: User;
+  account: Account;
+  createdAt: string;
+  deletedAt: string;
+};
+
+export type TeamMovementDetailedData = {
+  data: TeamMovementDetailed[];
+};
+
 export type RemoveUserFromAccount = {
   args: TeamMovementBody[];
 };

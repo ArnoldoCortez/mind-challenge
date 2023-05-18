@@ -7,6 +7,7 @@ import {
   AddAccountBody,
   EditAccountBody,
   TeamMovement,
+  TeamMovementDetailedData,
   TeamMovementBody,
   RemoveUserFromAccount,
   LoginRequest,
@@ -104,8 +105,14 @@ export const apiService = createApi({
       invalidatesTags: ["accounts"],
     }),
     // ---TEAM MOVEMENTS---
-    getTeamMovements: builder.query<TeamMovement[], void>({
-      query: () => "movements",
+    getTeamMovements: builder.query<TeamMovementDetailedData, void>({
+      query: () => ({
+        url: "getAllMovementsDetailed",
+        method: "POST",
+        body: {
+          args: [],
+        },
+      }),
       providesTags: ["movements"],
     }),
     addUserToAccount: builder.mutation<TeamMovement, TeamMovementBody>({
@@ -114,7 +121,7 @@ export const apiService = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["accountById"],
+      invalidatesTags: ["accountById", "movements"],
     }),
     removeUserFromAccount: builder.mutation<void, RemoveUserFromAccount>({
       query: (body) => ({
