@@ -1,17 +1,11 @@
 import { rest } from "msw";
+import { mockUsersResponse } from "./data";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const handlers = [
-  rest.get("https://pokeapi.co/api/v2/pokemon/bulbasaur", (_req, res, ctx) => {
-    const mockApiResponse = {
-      species: {
-        name: "bulbasaur",
-      },
-      sprites: {
-        front_shiny:
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png",
-      },
-    };
-    return res(ctx.json(mockApiResponse));
+  rest.get(`${API_URL}users`, (_req, res, ctx) => {
+    return res(ctx.json(mockUsersResponse));
   }),
 ];
 
