@@ -1,16 +1,26 @@
-import MainLayout from "../layouts/MainLayout";
-import ProfilePage from "../pages/Profile";
-import UsersPage from "../pages/Users";
-import AccountsPage from "../pages/Accounts";
-import TeamLogsPage from "../pages/TeamLogs";
-import UsersCreateUpdate from "../pages/UsersCreateUpdate";
-import AccountsCreateUpdate from "../pages/AccountsCreateUpdate";
-import AccountTeam from "../pages/AccountTeam";
-import ErrorPage from "../pages/ErrorPage";
+import { lazy, Suspense } from "react";
+
+const MainLayout = lazy(async () => await import("../layouts/MainLayout"));
+const ProfilePage = lazy(async () => await import("../pages/Profile"));
+const UsersPage = lazy(async () => await import("../pages/Users"));
+const AccountsPage = lazy(async () => await import("../pages/Accounts"));
+const TeamLogsPage = lazy(async () => await import("../pages/TeamLogs"));
+const UsersCreateUpdate = lazy(
+  async () => await import("../pages/UsersCreateUpdate")
+);
+const AccountsCreateUpdate = lazy(
+  async () => await import("../pages/AccountsCreateUpdate")
+);
+const AccountTeam = lazy(async () => await import("../pages/AccountTeam"));
+const ErrorPage = lazy(async () => await import("../pages/ErrorPage"));
 
 const MainRoutes = {
   path: "/",
-  element: <MainLayout />,
+  element: (
+    <Suspense fallback={<>Loading...</>}>
+      <MainLayout />
+    </Suspense>
+  ),
   errorElement: <ErrorPage />,
   children: [
     {
