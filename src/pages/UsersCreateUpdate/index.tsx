@@ -64,6 +64,7 @@ function UsersCreateUpdate() {
             message: "The user was successfully created!!",
           })
         );
+        navigate("/users");
       })
       .catch(() => {
         dispatch(
@@ -74,8 +75,6 @@ function UsersCreateUpdate() {
           })
         );
       });
-
-    navigate("/users");
   };
 
   const handleEditUserSubmit = async (data: TEditUserForm) => {
@@ -92,6 +91,7 @@ function UsersCreateUpdate() {
       })
         .unwrap()
         .then(() => {
+          navigate("/users");
           dispatch(
             setNotification({
               type: "success",
@@ -108,13 +108,12 @@ function UsersCreateUpdate() {
             })
           );
         });
-      navigate("/users");
     } else {
       navigate("/users");
     }
   };
 
-  if (isAddNewUserLoading || isEditUserLoading || isGetUserByIdLoading) {
+  if (isGetUserByIdLoading) {
     return <h1>Loading...</h1>;
   }
 
@@ -126,6 +125,7 @@ function UsersCreateUpdate() {
         </Typography>
         {isEdit ? (
           <EditUserForm
+            isLoading={isEditUserLoading}
             disableIsAdminCheckbox={
               !isSuperAdmin || user?.role === UserRoles.SUPER_ADMIN
             }
@@ -134,6 +134,7 @@ function UsersCreateUpdate() {
           />
         ) : (
           <AddUserForm
+            isLoading={isAddNewUserLoading}
             onSubmit={handleAddUserSubmit}
             disableIsAdminCheckbox={!isSuperAdmin}
           />

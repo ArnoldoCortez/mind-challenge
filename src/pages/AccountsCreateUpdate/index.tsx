@@ -95,14 +95,12 @@ function AccountsCreateUpdate() {
             })
           );
         });
+    } else {
+      navigate("/accounts");
     }
   };
 
-  if (
-    isAddNewAccountLoading ||
-    isEditAccountLoading ||
-    isGetAccountByIdLoading
-  ) {
+  if (isGetAccountByIdLoading) {
     return <h1>Loading...</h1>;
   }
 
@@ -115,10 +113,14 @@ function AccountsCreateUpdate() {
         {isEdit ? (
           <EditAccountForm
             initialData={initialData}
+            isLoading={isEditAccountLoading}
             onSubmit={handleEditAccountSubmit}
           />
         ) : (
-          <AddAccountForm onSubmit={handleAddAccountSubmit} />
+          <AddAccountForm
+            isLoading={isAddNewAccountLoading}
+            onSubmit={handleAddAccountSubmit}
+          />
         )}
       </Stack>
     </Container>

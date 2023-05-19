@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -12,6 +11,7 @@ import {
   Checkbox,
   FormControlLabel,
 } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -20,10 +20,15 @@ import { AddUserForm as TAddUserForm } from "../types";
 
 type Props = {
   disableIsAdminCheckbox?: boolean;
+  isLoading?: boolean;
   onSubmit: SubmitHandler<TAddUserForm>;
 };
 
-function AddUserForm({ onSubmit, disableIsAdminCheckbox = true }: Props) {
+function AddUserForm({
+  onSubmit,
+  disableIsAdminCheckbox = true,
+  isLoading = false,
+}: Props) {
   const { register, handleSubmit, formState, control } = useForm<TAddUserForm>({
     resolver: zodResolver(AddUserFormSchema),
   });
@@ -141,9 +146,13 @@ function AddUserForm({ onSubmit, disableIsAdminCheckbox = true }: Props) {
           </CardContent>
           <Divider />
           <CardActions sx={{ justifyContent: "flex-end" }}>
-            <Button type="submit" variant="contained">
+            <LoadingButton
+              loading={isLoading}
+              type="submit"
+              variant="contained"
+            >
               Save User
-            </Button>
+            </LoadingButton>
           </CardActions>
         </Card>
       </Stack>

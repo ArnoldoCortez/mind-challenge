@@ -7,19 +7,20 @@ import {
   Unstable_Grid2 as Grid,
   Divider,
   CardActions,
-  Button,
 } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { AccountFormSchema } from "../schemas";
 import { AccountForm } from "../types";
+import { LoadingButton } from "@mui/lab";
 
 type Props = {
   onSubmit: SubmitHandler<AccountForm>;
+  isLoading?: boolean;
 };
 
-function AddAccountForm({ onSubmit }: Props) {
+function AddAccountForm({ onSubmit, isLoading }: Props) {
   const { register, handleSubmit, formState } = useForm<AccountForm>({
     resolver: zodResolver(AccountFormSchema),
   });
@@ -70,9 +71,9 @@ function AddAccountForm({ onSubmit }: Props) {
         </CardContent>
         <Divider />
         <CardActions sx={{ justifyContent: "flex-end" }}>
-          <Button type="submit" variant="contained">
+          <LoadingButton loading={isLoading} type="submit" variant="contained">
             Save Account
-          </Button>
+          </LoadingButton>
         </CardActions>
       </Card>
     </form>

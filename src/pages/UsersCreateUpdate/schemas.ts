@@ -14,7 +14,7 @@ export const UserFormSchema = z.object({
     .trim()
     .url({ message: "Provide a valid URL format" })
     .or(z.literal("")),
-  isAdmin: z.boolean(),
+  isAdmin: z.boolean().default(false),
   password: z
     .string()
     .trim()

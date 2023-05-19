@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import {
   Box,
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -10,6 +9,7 @@ import {
   TextField,
   Unstable_Grid2 as Grid,
 } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -19,9 +19,10 @@ import { AccountForm } from "../types";
 type Props = {
   onSubmit: SubmitHandler<AccountForm>;
   initialData: AccountForm;
+  isLoading?: boolean;
 };
 
-function EditAccountForm({ onSubmit, initialData }: Props) {
+function EditAccountForm({ onSubmit, initialData, isLoading = false }: Props) {
   const { account, client, operationManager } = initialData;
   const { handleSubmit, formState, reset, control } = useForm<AccountForm>({
     resolver: zodResolver(AccountFormSchema),
@@ -105,9 +106,9 @@ function EditAccountForm({ onSubmit, initialData }: Props) {
         </CardContent>
         <Divider />
         <CardActions sx={{ justifyContent: "flex-end" }}>
-          <Button type="submit" variant="contained">
+          <LoadingButton loading={isLoading} type="submit" variant="contained">
             Save Account
-          </Button>
+          </LoadingButton>
         </CardActions>
       </Card>
     </form>

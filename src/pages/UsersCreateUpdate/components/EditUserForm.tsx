@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -11,6 +10,7 @@ import {
   Checkbox,
   FormControlLabel,
 } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -24,12 +24,14 @@ type Props = {
   initialData: TEditUserForm & {
     email: string;
   };
+  isLoading?: boolean;
 };
 
 function EditUserForm({
   onSubmit,
   initialData,
   disableIsAdminCheckbox = true,
+  isLoading = false,
 }: Props) {
   const { email, name, englishLevel, technicalKnowledge, cvLink, isAdmin } =
     initialData;
@@ -159,9 +161,9 @@ function EditUserForm({
         </CardContent>
         <Divider />
         <CardActions sx={{ justifyContent: "flex-end" }}>
-          <Button type="submit" variant="contained">
+          <LoadingButton loading={isLoading} type="submit" variant="contained">
             Save User
-          </Button>
+          </LoadingButton>
         </CardActions>
       </Card>
     </form>
