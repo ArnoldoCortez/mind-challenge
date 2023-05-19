@@ -1,7 +1,7 @@
 import { rest } from "msw";
 
 const handlers = [
-  rest.get("https://pokeapi.co/api/v2/pokemon/bulbasaur", (req, res, ctx) => {
+  rest.get("https://pokeapi.co/api/v2/pokemon/bulbasaur", (_req, res, ctx) => {
     const mockApiResponse = {
       species: {
         name: "bulbasaur",

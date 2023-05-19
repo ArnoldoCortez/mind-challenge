@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 
 import TopNav from "./components/TopNav";
 import { SideNav } from "./components/SideNav";
 import Notifications from "../../components/Notifications";
 import { PrivateOutlet } from "../../components/PrivateOutlet";
-import { useAuth } from "../../hooks/useAuth";
 
 const SIDE_NAV_WIDTH = 280;
 
