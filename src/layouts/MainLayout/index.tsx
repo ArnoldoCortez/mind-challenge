@@ -5,6 +5,8 @@ import { styled } from "@mui/material/styles";
 import TopNav from "./components/TopNav";
 import { SideNav } from "./components/SideNav";
 import Notifications from "../../components/Notifications";
+import { PrivateOutlet } from "../../components/PrivateOutlet";
+import { useAuth } from "../../hooks/useAuth";
 
 const SIDE_NAV_WIDTH = 280;
 
@@ -42,7 +44,7 @@ function MainLayout() {
       <SideNav onClose={() => setOpenNav(false)} open={openNav} />
       <LayoutRoot>
         <LayoutContainer>
-          <Outlet />
+          <PrivateOutlet />
         </LayoutContainer>
       </LayoutRoot>
       <Notifications />

@@ -9,14 +9,21 @@ import {
   Typography,
 } from "@mui/material";
 
-const user = {
-  name: "John Doe",
-  email: "jdoe@mind.com",
-  englishLevel: "B2",
-  technicalKnowledge: "ReactJS",
+type Props = {
+  name?: string;
+  email?: string;
+  englishLevel?: string;
+  technicalKnowledge?: string;
+  cvLink?: string;
 };
 
-export default function ProfileCard() {
+export default function ProfileCard({
+  name = "User name",
+  email = "",
+  englishLevel = "",
+  technicalKnowledge = "",
+  cvLink = "#",
+}: Props) {
   return (
     <Card>
       <CardContent>
@@ -35,24 +42,32 @@ export default function ProfileCard() {
             }}
           />
           <Typography gutterBottom variant="h5">
-            {user.name}
+            {name}
           </Typography>
           <Typography color="text.secondary" variant="body2">
-            {user.email}
+            {email}
           </Typography>
           <Typography color="text.secondary" variant="body2">
-            English {user.englishLevel}
+            {englishLevel ? `English ${englishLevel}` : ""}
           </Typography>
           <Typography color="text.secondary" variant="body2">
-            {user.technicalKnowledge}
+            {technicalKnowledge}
           </Typography>
         </Box>
       </CardContent>
       <Divider />
       <CardActions>
-        <Button fullWidth variant="text" component="a" target="_blank" href="#">
-          CV Link
-        </Button>
+        {cvLink ? (
+          <Button
+            fullWidth
+            variant="text"
+            component="a"
+            target="_blank"
+            href={cvLink}
+          >
+            CV Link
+          </Button>
+        ) : null}
       </CardActions>
     </Card>
   );

@@ -11,6 +11,7 @@ import { useLocation } from "react-router-dom";
 
 import { items } from "../config";
 import { SideNavItem } from "./SideNavItem";
+import { useAuth } from "../../../hooks/useAuth";
 
 type Props = {
   open: boolean;
@@ -18,9 +19,14 @@ type Props = {
 };
 
 export const SideNav = ({ open, onClose }: Props) => {
+  const { user } = useAuth();
   const location = useLocation();
   const theme = useTheme();
   const lgUp = useMediaQuery(theme.breakpoints.up("lg"));
+
+  const navItemsWithAccess = items.filter((item) =>
+    user?.role ? item.accessRoles.includes(user.role) : false
+  );
 
   const content = (
     <Box
@@ -71,7 +77,7 @@ export const SideNav = ({ open, onClose }: Props) => {
             m: 0,
           }}
         >
-          {items.map((item) => {
+          {navItemsWithAccess.map((item) => {
             const active = item.path ? location.pathname === item.path : false;
 
             return (

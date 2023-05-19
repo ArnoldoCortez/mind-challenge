@@ -1,3 +1,7 @@
+import { UserRoles } from "../constants/user.constants";
+
+export type UserRoles = (typeof UserRoles)[keyof typeof UserRoles];
+
 export type User = {
   id: string;
   name: string;
@@ -8,7 +12,7 @@ export type User = {
   knowledge: string;
   createdAt: string;
   updatedAt: string;
-  role: string;
+  role: UserRoles;
 };
 
 export type AddUserBody = {
@@ -18,6 +22,7 @@ export type AddUserBody = {
   englishLevel: string;
   cvLink: string;
   knowledge: string;
+  role?: UserRoles;
 };
 
 export type EditUserBody = Partial<Omit<AddUserBody, "password" | "email">> & {

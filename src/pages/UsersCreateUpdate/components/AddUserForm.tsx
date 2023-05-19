@@ -9,19 +9,22 @@ import {
   TextField,
   Unstable_Grid2 as Grid,
   Stack,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { AddUserFormSchema } from "../schemas";
 import { AddUserForm as TAddUserForm } from "../types";
 
 type Props = {
+  disableIsAdminCheckbox?: boolean;
   onSubmit: SubmitHandler<TAddUserForm>;
 };
 
-function AddUserForm({ onSubmit }: Props) {
-  const { register, handleSubmit, formState } = useForm<TAddUserForm>({
+function AddUserForm({ onSubmit, disableIsAdminCheckbox = true }: Props) {
+  const { register, handleSubmit, formState, control } = useForm<TAddUserForm>({
     resolver: zodResolver(AddUserFormSchema),
   });
   const { errors } = formState;
@@ -83,6 +86,20 @@ function AddUserForm({ onSubmit }: Props) {
                     error={errors.cvLink ? true : false}
                     helperText={errors.cvLink?.message}
                     {...register("cvLink")}
+                  />
+                </Grid>
+                <Grid xs={12} md={6}>
+                  <Controller
+                    name="isAdmin"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <FormControlLabel
+                        disabled={disableIsAdminCheckbox}
+                        control={<Checkbox {...field} />}
+                        label="Is Admin"
+                      />
+                    )}
                   />
                 </Grid>
               </Grid>

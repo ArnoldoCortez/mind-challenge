@@ -8,12 +8,20 @@ import {
 } from "@mui/material";
 
 type Props = {
+  name?: string;
   anchorEl: any;
+  onSignOut: () => void;
   onClose: () => void;
   open: boolean;
 };
 
-export const AccountPopover = ({ anchorEl, onClose, open }: Props) => {
+export const AccountPopover = ({
+  anchorEl,
+  onSignOut,
+  onClose,
+  open,
+  name = "User name",
+}: Props) => {
   return (
     <Popover
       anchorEl={anchorEl}
@@ -33,7 +41,7 @@ export const AccountPopover = ({ anchorEl, onClose, open }: Props) => {
       >
         <Typography variant="overline">Account</Typography>
         <Typography color="text.secondary" variant="body2">
-          John Doe
+          {name}
         </Typography>
       </Box>
       <Divider />
@@ -47,7 +55,9 @@ export const AccountPopover = ({ anchorEl, onClose, open }: Props) => {
           },
         }}
       >
-        <MenuItem>Sign out</MenuItem>
+        <MenuItem component="button" onClick={onSignOut}>
+          Sign out
+        </MenuItem>
       </MenuList>
     </Popover>
   );

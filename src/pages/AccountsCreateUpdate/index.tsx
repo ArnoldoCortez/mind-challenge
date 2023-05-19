@@ -42,7 +42,6 @@ function AccountsCreateUpdate() {
   }, [getAccountById, id, isEdit]);
 
   const handleAddAccountSubmit = (data: AccountForm) => {
-    navigate("/accounts");
     addNewAccount({
       name: data.account,
       clientName: data.client,
@@ -50,6 +49,7 @@ function AccountsCreateUpdate() {
     })
       .unwrap()
       .then(() => {
+        navigate("/accounts");
         dispatch(
           setNotification({
             type: "success",
@@ -69,7 +69,6 @@ function AccountsCreateUpdate() {
   };
 
   const handleEditAccountSubmit = (data: AccountForm) => {
-    navigate("/accounts");
     if (id) {
       editAccount({
         id,
@@ -79,6 +78,7 @@ function AccountsCreateUpdate() {
       })
         .unwrap()
         .then(() => {
+          navigate("/accounts");
           dispatch(
             setNotification({
               type: "success",

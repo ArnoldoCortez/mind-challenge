@@ -4,10 +4,13 @@ import BuildingOfficeIcon from "@heroicons/react/24/solid/BuildingOffice2Icon";
 import RectangleStackIcon from "@heroicons/react/24/solid/RectangleStackIcon";
 import { SvgIcon } from "@mui/material";
 
+import { UserRoles } from "../../constants/user.constants";
+
 export const items = [
   {
     title: "Profile",
     path: "/",
+    accessRoles: [UserRoles.USER, UserRoles.ADMIN, UserRoles.SUPER_ADMIN],
     icon: (
       <SvgIcon fontSize="small">
         <UserIcon />
@@ -17,6 +20,7 @@ export const items = [
   {
     title: "Users",
     path: "/users",
+    accessRoles: [UserRoles.ADMIN, UserRoles.SUPER_ADMIN],
     icon: (
       <SvgIcon fontSize="small">
         <UsersIcon />
@@ -26,6 +30,7 @@ export const items = [
   {
     title: "Accounts",
     path: "/accounts",
+    accessRoles: [UserRoles.ADMIN, UserRoles.SUPER_ADMIN],
     icon: (
       <SvgIcon fontSize="small">
         <BuildingOfficeIcon />
@@ -35,6 +40,7 @@ export const items = [
   {
     title: "Team logs",
     path: "/team-logs",
+    accessRoles: [UserRoles.ADMIN, UserRoles.SUPER_ADMIN],
     icon: (
       <SvgIcon fontSize="small">
         <RectangleStackIcon />

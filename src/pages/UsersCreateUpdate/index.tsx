@@ -15,11 +15,14 @@ import {
 } from "./types";
 import { useAppDispatch } from "../../store/hooks";
 import { setNotification } from "../../store/general/general.slice";
+import { UserRoles } from "../../constants/user.constants";
+import { useAuth } from "../../hooks/useAuth";
 
 function UsersCreateUpdate() {
   const { id, action } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { isSuperAdmin } = useAuth();
 
   const [getUserById, { data: user, isLoading: isGetUserByIdLoading }] =
     useLazyGetUserByIdQuery();
@@ -34,6 +37,7 @@ function UsersCreateUpdate() {
     englishLevel: user ? user.englishLevel : "",
     technicalKnowledge: user ? user.knowledge : "",
     cvLink: user ? user.cvLink : "",
+    isAdmin: user?.role === UserRoles.ADMIN,
   };
 
   useEffect(() => {
@@ -50,6 +54,7 @@ function UsersCreateUpdate() {
       englishLevel: data.englishLevel,
       cvLink: data.cvLink,
       knowledge: data.technicalKnowledge,
+      ...(data.isAdmin && { role: UserRoles.ADMIN }),
     })
       .unwrap()
       .then(() => {
@@ -81,6 +86,9 @@ function UsersCreateUpdate() {
         englishLevel: data.englishLevel,
         cvLink: data.cvLink,
         knowledge: data.technicalKnowledge,
+        ...(user?.role !== UserRoles.SUPER_ADMIN && {
+          role: data.isAdmin ? UserRoles.ADMIN : UserRoles.USER,
+        }),
       })
         .unwrap()
         .then(() => {
@@ -100,7 +108,8 @@ function UsersCreateUpdate() {
             })
           );
         });
-
+      navigate("/users");
+    } else {
       navigate("/users");
     }
   };
@@ -117,11 +126,17 @@ function UsersCreateUpdate() {
         </Typography>
         {isEdit ? (
           <EditUserForm
+            disableIsAdminCheckbox={
+              !isSuperAdmin || user?.role === UserRoles.SUPER_ADMIN
+            }
             onSubmit={handleEditUserSubmit}
             initialData={initialData}
           />
         ) : (
-          <AddUserForm onSubmit={handleAddUserSubmit} />
+          <AddUserForm
+            onSubmit={handleAddUserSubmit}
+            disableIsAdminCheckbox={!isSuperAdmin}
+          />
         )}
       </Stack>
     </Container>

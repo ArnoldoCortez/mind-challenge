@@ -7,10 +7,16 @@ type AuthState = {
   token: string | null;
 };
 
+const initialState: AuthState = {
+  user: null,
+  token: null,
+};
+
 const slice = createSlice({
   name: "auth",
-  initialState: { user: null, token: null } as AuthState,
+  initialState: initialState,
   reducers: {
+    reset: () => initialState,
     setCredentials: (
       state,
       { payload: { user, token } }: PayloadAction<{ user: User; token: string }>
@@ -21,6 +27,6 @@ const slice = createSlice({
   },
 });
 
-export const { setCredentials } = slice.actions;
+export const { setCredentials, reset } = slice.actions;
 
 export default slice.reducer;

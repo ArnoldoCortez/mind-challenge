@@ -8,6 +8,8 @@ import {
   Divider,
   TextField,
   Unstable_Grid2 as Grid,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,14 +19,20 @@ import { EditUserForm as TEditUserForm } from "../types";
 import { useEffect } from "react";
 
 type Props = {
+  disableIsAdminCheckbox?: boolean;
   onSubmit: SubmitHandler<TEditUserForm>;
   initialData: TEditUserForm & {
     email: string;
   };
 };
 
-function EditUserForm({ onSubmit, initialData }: Props) {
-  const { email, name, englishLevel, technicalKnowledge, cvLink } = initialData;
+function EditUserForm({
+  onSubmit,
+  initialData,
+  disableIsAdminCheckbox = true,
+}: Props) {
+  const { email, name, englishLevel, technicalKnowledge, cvLink, isAdmin } =
+    initialData;
   const { handleSubmit, formState, reset, control } = useForm<TEditUserForm>({
     resolver: zodResolver(EditUserFormSchema),
     defaultValues: {
@@ -32,6 +40,7 @@ function EditUserForm({ onSubmit, initialData }: Props) {
       englishLevel,
       technicalKnowledge,
       cvLink,
+      isAdmin,
     },
   });
 
@@ -43,8 +52,9 @@ function EditUserForm({ onSubmit, initialData }: Props) {
       englishLevel,
       technicalKnowledge,
       cvLink,
+      isAdmin,
     });
-  }, [reset, name, englishLevel, technicalKnowledge, cvLink]);
+  }, [reset, name, englishLevel, technicalKnowledge, cvLink, isAdmin]);
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
@@ -123,6 +133,23 @@ function EditUserForm({ onSubmit, initialData }: Props) {
                       error={errors.cvLink ? true : false}
                       helperText={errors.cvLink?.message}
                       {...field}
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid xs={12} md={6}>
+                <Controller
+                  name="isAdmin"
+                  control={control}
+                  render={({ field: { value, onChange } }) => (
+                    <FormControlLabel
+                      disabled={disableIsAdminCheckbox}
+                      checked={value}
+                      onChange={(_event, newValue) => {
+                        onChange(newValue);
+                      }}
+                      control={<Checkbox />}
+                      label="Is Admin"
                     />
                   )}
                 />
